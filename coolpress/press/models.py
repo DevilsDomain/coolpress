@@ -23,6 +23,8 @@ class CoolUser(models.Model):
     github_repositories = models.IntegerField(null=True)
 
 
+
+
 class poststatus:
     DRAFT = 'DRAFT'
     PUBLISHED = 'PUBLISHED'

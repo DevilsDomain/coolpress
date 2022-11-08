@@ -1,0 +1,152 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "tuxskar",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-11-08T19:15:00.075Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "DevilsDomain",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-11-08T19:17:08.777Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "press.category",
+    "pk": 1,
+    "fields": {
+        "label": "Health",
+        "slug": "HEALTH"
+    }
+},
+{
+    "model": "press.category",
+    "pk": 2,
+    "fields": {
+        "label": "Cooking",
+        "slug": "COOKING"
+    }
+},
+{
+    "model": "press.category",
+    "pk": 3,
+    "fields": {
+        "label": "Sports",
+        "slug": "SPORTS"
+    }
+},
+{
+    "model": "press.cooluser",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "gravatar": "",
+        "github_profile": "",
+        "github_repositories": null
+    }
+},
+{
+    "model": "press.cooluser",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "gravatar": "",
+        "github_profile": "",
+        "github_repositories": null
+    }
+},
+{
+    "model": "press.post",
+    "pk": 1,
+    "fields": {
+        "title": "Devil's first post",
+        "body": "Hello World!",
+        "image_link": "",
+        "status": "DRAFT",
+        "author": 2,
+        "category": 2,
+        "creation_date": "2022-11-08T19:38:45.173Z",
+        "last_update": "2022-11-08T19:38:45.173Z"
+    }
+},
+{
+    "model": "press.post",
+    "pk": 4,
+    "fields": {
+        "title": "Devil's Second post",
+        "body": "Django can be very tricky sometimes",
+        "image_link": "",
+        "status": "DRAFT",
+        "author": 2,
+        "category": 1,
+        "creation_date": "2022-11-08T19:51:26.960Z",
+        "last_update": "2022-11-08T19:51:26.960Z"
+    }
+},
+{
+    "model": "press.post",
+    "pk": 5,
+    "fields": {
+        "title": "Third Post",
+        "body": "Contents of third post",
+        "image_link": "",
+        "status": "DRAFT",
+        "author": 1,
+        "category": 1,
+        "creation_date": "2022-11-08T19:53:02.804Z",
+        "last_update": "2022-11-08T19:53:02.804Z"
+    }
+},
+{
+    "model": "press.post",
+    "pk": 6,
+    "fields": {
+        "title": "4th post",
+        "body": "Contents of 4th post",
+        "image_link": "",
+        "status": "DRAFT",
+        "author": 1,
+        "category": 1,
+        "creation_date": "2022-11-08T19:53:39.129Z",
+        "last_update": "2022-11-08T19:53:39.130Z"
+    }
+},
+{
+    "model": "press.post",
+    "pk": 7,
+    "fields": {
+        "title": "5th post",
+        "body": "Contents of 5th post",
+        "image_link": "",
+        "status": "DRAFT",
+        "author": 1,
+        "category": 1,
+        "creation_date": "2022-11-08T19:54:04.387Z",
+        "last_update": "2022-11-08T19:54:04.387Z"
+    }
+}
+]
