@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from pip._internal.utils.misc import enum
 
 
 class Category(models.Model):
@@ -18,8 +17,8 @@ class Category(models.Model):
 
 class CoolUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    gravatar = models.URLField()
-    github_profile = models.URLField()
+    gravatar = models.URLField(null=True, blank=True)
+    github_profile = models.URLField(null= True, blank=True)
     github_repositories = models.IntegerField(null=True)
 
 
