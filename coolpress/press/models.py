@@ -32,7 +32,7 @@ class poststatus:
 class Post(models.Model):
     title = models.CharField(max_length=400)
     body = models.TextField()
-    image_link = models.URLField()
+    image_link = models.URLField(null=True, blank=True )
     status = models.CharField(max_length=32,
                               choices=[(poststatus.DRAFT, 'Draft'), (poststatus.PUBLISHED, 'Published')],
                               default=poststatus.DRAFT)
