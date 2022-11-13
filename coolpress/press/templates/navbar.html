@@ -36,6 +36,8 @@
                     <div class="dropdown-menu" aria-labelledby="navUser">
                         <a class="btn btn-danger" href="{% url 'logout' %}">Log Out</a>
                         <a class="btn btn-primary" href="{% url 'post-add' %}">Create Post</a>
+                        <a class="btn btn-primary" href="{% url 'new-category' user.id %}">New Category</a>
+
 
                     </div>
                 </li>

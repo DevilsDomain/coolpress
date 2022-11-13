@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from press.models import Post
+from press.models import Post, Category
 
 
 class CommentForm(forms.Form):
@@ -22,3 +22,14 @@ class PostForm(ModelForm):
             'category': forms.Select(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
+
+
+class NewCategory(ModelForm):
+    class Meta:
+        model = Category
+        fields = ['label', 'slug']
+
+        widgets = {
+            'label': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            }
