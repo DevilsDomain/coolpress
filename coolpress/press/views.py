@@ -13,11 +13,12 @@ def home(request):
     now = datetime.datetime.now()
     msg = 'Welcome to Coolpres'
     categories = Category.objects.all()
+    latest = Post.objects.order_by('-id')[:5]
     user = request.user
     li_cats = [f'<li>{cat.label}</li>' for cat in categories]
     cats_ul = f'<ul>{"".join(li_cats)}</ul>'
 
-    html = f"<html><head><title>{msg}</title><body><h1>{msg}</h1><div>{user}</div><p>It is now {now}.<p>{cats_ul}</body></html>"
+    html = f"<html><head><title>{msg}</title><body><h1>{msg}</h1><div>{user}</div><p>It is now {now}.</p>{cats_ul}</body></html>"
     return HttpResponse(html)
 
 
