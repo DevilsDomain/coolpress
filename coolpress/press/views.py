@@ -1,9 +1,13 @@
 import datetime
+from itertools import chain
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404
+from django.template.defaultfilters import join
 from django.urls import reverse
+from django.views.generic import ListView, TemplateView
 from rest_framework.templatetags.rest_framework import data
 
 from press.forms import CommentForm, PostForm, NewCategory
@@ -34,7 +38,6 @@ def render_a_post(post):
 
 
 def create_new_category(request):
-
     form = NewCategory(request.POST)
     if request.method == "POST":
         if form.is_valid():
@@ -94,3 +97,25 @@ def post_update(request, post_id=None):
         form = PostForm(instance=post)
 
     return render(request, 'posts_update.html', {'form': form})
+
+
+# class CategoryListView(ListView):
+#     queryset = Category.objects.all()
+#     template_name = 'home_page.html'
+#
+#
+# class LatestPostListView(ListView):
+#     queryset = Post.objects.order_by('-id')[:3]
+#     template_name = 'post_list.html'
+#
+
+def HomePage(request):
+    posts = Post.objects.order_by('-id')[:5]
+    cats = Category.objects.all()
+    return render(request, 'home_page.html', {'posts': posts, 'cats': cats})
+
+
+class AuthorListView(ListView):
+    queryset = User.objects.all()
+    paginate_by = 10
+    template_name = 'author_list.html'

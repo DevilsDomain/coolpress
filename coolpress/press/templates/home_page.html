@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Categories</h2>
+{% if user.is_authenticated %}
+<div class="text-right mb-2">
+</div>
+{% endif %}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Category</th>
+        <th>Number of Posts</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for category in cats %}
+    <tr scope="row">
+        <td>{{category.label}}</td>
+        <td>
+            <a href="{% url 'category-list' %}">
+                {{category.post_set.count}}
+            </a>
+        </td>
+        <td>
+
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% for post in posts %}
+<div class="card mb-3 post">
+    <div class="row no-gutters">
+        {% if post.image_link %}
+        <div class="col-md-4 post-image-box">
+            <img class="post-image" src="{{post.image_link}}" alt="{{post.title}}">
+        </div>
+        {% endif %}
+        <div class="{% if post.image_link %}col-md-8{% else %}col-md-12{% endif %}">
+            <div class="card-header">
+                {{post.category.slug}}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.body|urlize}}</p>
+                <p class="card-text"><small class="text-muted">{{post.last_update}}</small></p>
+                <p class="card-text"><a href=""><small
+                        class="text-muted">{{post.author}}</small></a></p>
+            </div>
+            <div class="card-footer bg-transparent border-success">
+                <a href="{% url 'posts-detail' post.id %}" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% empty %}
+
+<p class="text-center font-weight-bold">
+    There are no posts yet for this category, let's create some :D
+</p>
+
+{% endfor %}
+
+{% endblock %}
