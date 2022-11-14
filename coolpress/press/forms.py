@@ -24,12 +24,8 @@ class PostForm(ModelForm):
         }
 
 
-class NewCategory(ModelForm):
-    class Meta:
-        model = Category
-        fields = ['label', 'slug']
-
-        widgets = {
-            'label': forms.TextInput(attrs={'class': 'form-control'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control'}),
-            }
+class NewCategory(forms.Form):
+    label = forms.CharField(label='Add a category name',
+                            widget=forms.TextInput(attrs={'class': 'form-control'}))
+    slug = forms.CharField(label='add the slug',
+                           widget=forms.TextInput(attrs={'class': 'form-control'}))

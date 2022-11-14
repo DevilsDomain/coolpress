@@ -33,15 +33,14 @@ def render_a_post(post):
 #     return render(request, 'new_category.html')
 
 
-def create_new_category(request, user_id):
+def create_new_category(request):
 
-    user_id = CoolUser.objects.get(user_id=user_id)
     form = NewCategory(request.POST)
     if request.method == "POST":
         if form.is_valid():
             label = form.cleaned_data.get('label')
             slug = form.cleaned_data['slug']
-            Category.objects.create(label=label, slug=slug, created_by=user_id)
+            Category.objects.create(label=label, slug=slug, created_by=request.user.cooluser)
     form = NewCategory()
     return render(request, "new_category.html", {'form': form})
 
