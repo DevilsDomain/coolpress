@@ -99,16 +99,6 @@ def post_update(request, post_id=None):
     return render(request, 'posts_update.html', {'form': form})
 
 
-# class CategoryListView(ListView):
-#     queryset = Category.objects.all()
-#     template_name = 'home_page.html'
-#
-#
-# class LatestPostListView(ListView):
-#     queryset = Post.objects.order_by('-id')[:3]
-#     template_name = 'post_list.html'
-#
-
 def HomePage(request):
     posts = Post.objects.order_by('-id')[:5]
     cats = Category.objects.all()
@@ -116,6 +106,8 @@ def HomePage(request):
 
 
 class AuthorListView(ListView):
-    queryset = User.objects.all()
+    query1 = User.objects.all()
+    query2 = CoolUser.objects.all()
+    queryset = list(chain(query1, query2))
     paginate_by = 10
     template_name = 'author_list.html'

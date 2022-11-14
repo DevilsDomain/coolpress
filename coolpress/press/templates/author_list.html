@@ -7,6 +7,10 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Username</th>
+        <th>Github Profile</th>
+        <th>Github Repositories</th>
+
+
 
 
     </tr>
@@ -17,6 +21,10 @@
         <td>{{user.first_name}}</td>
         <td>{{user.last_name}}</td>
         <td>{{user.username}}</td>
+        <td>{{user.cooluser.github_profile}}</td>
+        <td>{{user.cooluser.gh_repositories}}</td>
+
+
     </tr>
     {% endfor %}
     </tbody>
