@@ -7,7 +7,8 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadReque
 from django.shortcuts import render, get_object_or_404
 from django.template.defaultfilters import join
 from django.urls import reverse
-from django.views.generic import ListView, TemplateView
+from django.views import View
+from django.views.generic import ListView, TemplateView, CreateView
 from rest_framework.templatetags.rest_framework import data
 
 from press.forms import CommentForm, PostForm, NewCategory
@@ -57,7 +58,6 @@ def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     data = request.POST or {'votes': 10}
     form = CommentForm(data)
-
     comments = post.comment_set.order_by('-creation_date')
     return render(request, 'posts_detail.html', {'post_obj': post, 'comment_form': form, 'comments': comments})
 
@@ -111,3 +111,9 @@ class AuthorListView(ListView):
     queryset = list(chain(query1, query2))
     paginate_by = 10
     template_name = 'author_list.html'
+
+
+class AuthorPosts(View):
+    def get(self, request):
+        objects = Post.objects.filter(author_id=request.user.cooluser)
+        return render(request, 'author_posts_list.html', {'posts_list': objects})
