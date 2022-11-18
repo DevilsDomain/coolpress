@@ -171,6 +171,8 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().filter(status=PostStatus.PUBLISHED) \
         .order_by('-creation_date')
     serializer_class = PostSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category']
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
 
