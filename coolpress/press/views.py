@@ -10,8 +10,9 @@ from django.template.defaultfilters import join
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, TemplateView, CreateView
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.templatetags.rest_framework import data
-from rest_framework import viewsets, mixins, permissions
+from rest_framework import viewsets, mixins, permissions, generics
 from rest_framework.viewsets import GenericViewSet
 
 from press.forms import CommentForm, PostForm, NewCategory
@@ -143,6 +144,8 @@ class CategoryViewSet(ModelNonDeletableViewSet):
     """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['id']
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -182,3 +185,5 @@ class AuthorsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CoolUser.objects.alias(posts=Count('post')).filter(posts__gte=1)
     serializer_class = AuthorSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+

@@ -30,3 +30,5 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CoolUser
         fields = ['id', 'user', 'github_profile']
+
+
