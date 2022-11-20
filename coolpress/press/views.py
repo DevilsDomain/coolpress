@@ -127,9 +127,9 @@ class AuthorPosts(View):
 
 class TrendingPosts(View):
     def get(self, request):
-        main_query = Comment.objects.values('post').annotate(comments=Count('post'))
+        main_query = Comment.objects.values('post').annotate(comments=Count('post')).order_by()
         second_query = main_query.filter(comments__gte=5)
-
+        print(main_query)
         posts_id = []
         for i in range(len(second_query)):
             posts_id.append(second_query[i]['post'])
