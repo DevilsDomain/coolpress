@@ -125,6 +125,21 @@ class AuthorPosts(View):
         return render(request, 'author_posts_list.html', {'posts_list': objects})
 
 
+class TrendingPosts(View):
+    def get(self, request):
+        main_query = Comment.objects.values('post').annotate(comments=Count('post'))
+        second_query = main_query.filter(comments__gte=5)
+
+        posts_id = []
+        for i in range(len(second_query)):
+            posts_id.append(second_query[i]['post'])
+
+        queryset = Post.objects.filter(id__in=posts_id)
+        return render(request, 'trending_posts.html', {'trending_posts': queryset})
+
+
+# API views
+
 class ModelNonDeletableViewSet(mixins.CreateModelMixin,
                                mixins.RetrieveModelMixin,
                                mixins.UpdateModelMixin,
@@ -188,4 +203,3 @@ class AuthorsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CoolUser.objects.alias(posts=Count('post')).filter(posts__gte=1)
     serializer_class = AuthorSerializer
     permission_classes = [permissions.IsAuthenticated]
-
