@@ -2,3 +2,5 @@ django==3.2.7
 djangorestframework
 pyyaml
 uritemplate
+requests
+libgravatar
