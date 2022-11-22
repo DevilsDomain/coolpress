@@ -4,3 +4,5 @@ pyyaml
 uritemplate
 requests
 libgravatar
+bs4
+django-filter

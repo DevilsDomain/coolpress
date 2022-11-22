@@ -1,6 +1,10 @@
+from typing import Optional
+
 from django.contrib.auth.models import User
 from django.db import models
 from libgravatar import Gravatar
+import requests
+from bs4 import BeautifulSoup
 
 
 class CoolUser(models.Model):
@@ -10,11 +14,34 @@ class CoolUser(models.Model):
     gh_repositories = models.IntegerField(null=True, blank=True)
     gravatar_updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
+    # def save(self, *args, **kwargs):
+    #     super(CoolUser, self).save(*args, **kwargs)
+    #     if self.user.email is not None:
+    #         self.gravatar_link = Gravatar(self.user.email).get_image()
+    #     print('getting gravatar')
+
     def save(self, *args, **kwargs):
-        super(CoolUser, self).save(*args, **kwargs)
         if self.user.email is not None:
             self.gravatar_link = Gravatar(self.user.email).get_image()
-        print('getting gravatar')
+        self.gh_repositories = self.get_github_repos()
+        super(CoolUser, self).save(*args, **kwargs)
+
+    def get_github_url(self) -> Optional[str]:
+        if self.github_profile:
+            url = f'https://github.com/{self.github_profile}'
+            response = requests.get(url)
+            if response.status_code == 200:
+                return url
+
+    def get_github_repos(self) -> Optional[int]:
+        url = self.get_github_url()
+        if url:
+            response = requests.get(url)
+            soup = BeautifulSoup(response.content, 'html.parser')
+            css_selector = '.Counter'
+            repositories_info = soup.select_one(css_selector)
+            repos_text = repositories_info.text
+            return int(repos_text)
 
     def __str__(self):
         return f'{self.user.username}'

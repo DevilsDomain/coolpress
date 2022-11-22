@@ -138,6 +138,12 @@ class TrendingPosts(View):
         return render(request, 'trending_posts.html', {'trending_posts': queryset})
 
 
+def user_details(request, id):
+    author = User.objects.get(id=id)
+    cu = CoolUser.objects.get(user_id=author.id)
+    return render(request, 'user_details.html', {'author': author, 'cu': cu})
+
+
 # API views
 
 class ModelNonDeletableViewSet(mixins.CreateModelMixin,

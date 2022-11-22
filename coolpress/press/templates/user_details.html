@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{author.username}}</h1>
+
+<img src="{{cu.gravatar_link}}">
+<p>gravatar updated at: {{cu.gravatar_updated_at}}</p>
+<ol>
+    <li>author email: {{author.email}}</li>
+    <li>last seen: {{author.last_login}}</li>
+    {% if author.first_name == '' %}
+    <li>first name: This user has not entered a name</li>
+    <li>last name: This user has not entered a last name</li>
+    {% else %}
+    <li>first name: {{author.first_name}}</li>
+    <li>last name: {{author.last_name}}</li>
+        {% endif %}
+
+</ol>
+
+
+
+{% endblock %}

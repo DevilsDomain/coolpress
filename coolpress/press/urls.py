@@ -19,6 +19,7 @@ urlpatterns = [
     path('home/', views.HomePage, name='category-list'),
     path('authors/', AuthorListView.as_view(), name='author-list'),
     path('authors/posts/', AuthorPosts.as_view(), name='author-posts'),
+    path('author/<int:id>/', views.user_details, name='author-details'),
     path('trending/', TrendingPosts.as_view(), name='trending-posts'),
 
     path('api/', include(router.urls)),
